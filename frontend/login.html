@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>BIAS — Auth</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+:root {
+  --bg-dark: #050b0f;
+  --panel-bg: rgba(8, 22, 26, 0.9);
+  --cyan: #3fffdc;
+  --text-main: #eafffb;
+  --icon: rgba(63,255,220,0.75);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at top, #0b3b3b 0%, transparent 60%),
+    linear-gradient(180deg, #02080b, #050b0f);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(63,255,220,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63,255,220,0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  padding: 32px 16px 24px;
+  text-align: center;
+  z-index: 1;
+}
+
+.logo {
+  width: min(92vw, 420px);
+  margin: 0 auto 36px;
+  display: block;
+  filter:
+    drop-shadow(0 0 36px rgba(63,255,220,0.95))
+    drop-shadow(0 0 90px rgba(63,255,220,0.45));
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(12,30,34,0.96),
+    rgba(6,16,18,0.96)
+  );
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  padding: 2px;
+  background:
+    conic-gradient(
+      from var(--angle),
+      transparent 0deg,
+      var(--cyan) 45deg,
+      #ffffff 60deg,
+      var(--cyan) 75deg,
+      transparent 120deg,
+      transparent 360deg
+    );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  filter:
+    drop-shadow(0 0 6px rgba(63,255,220,0.85))
+    drop-shadow(0 0 14px rgba(63,255,220,0.55));
+  animation: border-flow 2.8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes border-flow {
+  to { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.tabs {
+  display: flex;
+  background: rgba(0,0,0,0.4);
+  border-radius: 14px;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  padding: 14px 0;
+  font-size: 14px;
+  color: #9fcfc7;
+}
+
+.tab.active {
+  color: #eafffb;
+  background: rgba(63,255,220,0.14);
+}
+
+.field {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.field input {
+  width: 100%;
+  padding: 16px 52px 16px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(63,255,220,0.25);
+  background: rgba(4,14,16,0.92);
+  color: var(--text-main);
+  font-size: 16px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px rgba(63,255,220,0.6);
+}
+
+.icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  stroke: var(--icon);
+  cursor: pointer;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(180deg, #3fffdc, #21c9b2);
+  color: #022f2a;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 0 14px rgba(63,255,220,0.85);
+}
+
+@media (min-width: 768px) {
+  body { align-items: center; }
+  .container { max-width: 460px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <img src="logo.jpeg" alt="BIAS Logo" class="logo" />
+
+  <div class="card">
+    <div class="tabs">
+      <div class="tab active">Sign Up</div>
+      <div class="tab">Log In</div>
+    </div>
+
+    <!-- USERNAME -->
+    <div class="field">
+      <input type="text" placeholder="Username" />
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 16-4 16 0"/>
+      </svg>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="field">
+      <input type="email" placeholder="Email" />
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M4 4l8 8 8-8"/>
+      </svg>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="field">
+      <input type="password" id="password" placeholder="Password" />
+      <svg class="icon" id="togglePassword" viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </div>
+
+    <button class="btn">Sign Up</button>
+  </div>
+</div>
+
+<script>
+const toggle = document.getElementById("togglePassword");
+const password = document.getElementById("password");
+
+toggle.addEventListener("click", () => {
+  const isHidden = password.type === "password";
+  password.type = isHidden ? "text" : "password";
+
+  toggle.innerHTML = isHidden
+    ? '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.8 21.8 0 0 1 5.06-5.94"/><path d="M1 1l22 22"/>'
+    : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
+});
+</script>
+</body>
+</html>
